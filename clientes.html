@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clientes — Construcciones Metálicas S.R.L.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #2A7D8C; --teal-light: #3A9BAD; --teal-dark: #1D5F6B;
+    --gray-brand: #8A9099; --gray-light: #B0B8C1;
+    --steel: #1C2B3A; --steel-mid: #2E3D4D;
+    --warm-white: #F4F5F6; --dark: #0F1820;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--warm-white); color: var(--steel); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 70px;
+    background: rgba(15,24,32,0.97); backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--teal-dark);
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-icon { width: 36px; height: 36px; position: relative; }
+  .logo-icon::before { content: ''; position: absolute; width: 22px; height: 22px; background: var(--teal); border-radius: 4px; transform: rotate(45deg); top: 2px; left: 2px; }
+  .logo-icon::after { content: ''; position: absolute; width: 13px; height: 13px; background: var(--gray-brand); border-radius: 3px; transform: rotate(45deg); top: 11px; left: 11px; }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--warm-white); letter-spacing: 3px; line-height: 1; }
+  .logo span { color: var(--teal-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--gray-light); text-decoration: none; font-size: 0.76rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--teal-light); }
+  .nav-cta { background: var(--teal) !important; color: white !important; padding: 8px 22px; }
+
+  .page-hero {
+    padding: 140px 8% 80px; background: var(--dark); position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px);
+  }
+  .page-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--teal-light); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; position: relative; }
+  .page-tag::before { content: ''; width: 24px; height: 2px; background: var(--teal-light); }
+  .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); color: var(--warm-white); letter-spacing: 2px; line-height: 1; position: relative; }
+  .page-hero p { color: rgba(244,245,246,0.55); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-top: 16px; font-weight: 300; position: relative; }
+
+  .section { padding: 80px 8%; }
+  .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--teal); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); color: var(--steel); line-height: 1; letter-spacing: 1px; margin-bottom: 50px; }
+
+  /* Clients grid */
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,0.07);
+  }
+  .client-card {
+    background: white;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    transition: background .2s, transform .2s;
+    position: relative;
+  }
+  .client-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--teal); transition: width .4s; }
+  .client-card:hover { background: var(--warm-white); transform: translateY(-3px); }
+  .client-card:hover::after { width: 100%; }
+
+  .client-sector {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: rgba(42,125,140,0.08);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .client-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--steel);
+    line-height: 1.2;
+  }
+  .client-card p {
+    font-size: 0.82rem;
+    color: #5A6B7A;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* Industries strip */
+  .industries-section {
+    background: var(--steel);
+    padding: 80px 8%;
+  }
+  .industries-section .section-label { color: var(--teal-light); }
+  .industries-section .section-label::before { background: var(--teal-light); }
+  .industries-section .section-title { color: var(--warm-white); }
+
+  .industries-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.04);
+  }
+  .industry-item {
+    background: rgba(255,255,255,0.03);
+    padding: 36px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: background .2s;
+  }
+  .industry-item:hover { background: rgba(42,125,140,0.15); }
+  .industry-icon { font-size: 2rem; }
+  .industry-item h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--warm-white); margin-bottom: 4px; }
+  .industry-item p { font-size: 0.82rem; color: rgba(244,245,246,0.45); font-weight: 300; }
+
+  /* CTA section */
+  .cta-section {
+    padding: 80px 8%;
+    text-align: center;
+    background: var(--warm-white);
+  }
+  .cta-section h2 { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--steel); letter-spacing: 2px; margin-bottom: 16px; }
+  .cta-section p { color: #5A6B7A; font-size: 1rem; font-weight: 300; margin-bottom: 32px; }
+  .btn-primary {
+    background: var(--teal); color: white; padding: 14px 36px;
+    text-decoration: none; font-size: 0.82rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase; display: inline-block;
+    transition: background .2s;
+  }
+  .btn-primary:hover { background: var(--teal-light); }
+
+  footer {
+    background: var(--dark);
+    padding: 32px 8%;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 2px solid var(--teal-dark);
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--warm-white); letter-spacing: 3px; }
+  .footer-logo span { color: var(--teal-light); }
+  footer p { font-size: 0.74rem; color: var(--gray-brand); font-weight: 300; }
+
+  .whatsapp-float {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; box-shadow: 0 6px 24px rgba(37,211,102,0.35);
+    cursor: pointer; z-index: 200; transition: transform .2s; text-decoration: none;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <div class="logo-icon"></div>
+    <div class="logo">CONSTRUCCIONES <span>METÁLICAS</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="proyectos.html">Proyectos</a></li>
+    <li><a href="clientes.html" class="active">Clientes</a></li>
+    <li><a href="empresa.html">Empresa</a></li>
+    <li><a href="contacto.html" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-tag">Quiénes confían en nosotros</div>
+  <h1>Nuestros Clientes</h1>
+  <p>Empresas líderes en alimentación, energía, agroindustria y manufactura de toda la Argentina eligieron Construcciones Metálicas para sus obras más importantes.</p>
+</div>
+
+<section class="section">
+  <div class="section-label">Empresas que trabajaron con nosotros</div>
+  <div class="section-title">Clientes Destacados</div>
+  <div class="clients-grid">
+    <div class="client-card">
+      <span class="client-sector">Cervecería</span>
+      <h3>Quilmes</h3>
+      <p>Cervecería y Maltería · Zárate, Bs. As.</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Agroindustria</span>
+      <h3>Agroservicios Pampeanos</h3>
+      <p>Grupo Agrium Inc. · Argentina</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Educación</span>
+      <h3>Universidad Austral</h3>
+      <p>Pilar, Buenos Aires</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Alimentación</span>
+      <h3>ARCOR S.A.I.C.</h3>
+      <p>Tucumán, Argentina</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Industrial</span>
+      <h3>CINA S.R.L.</h3>
+      <p>Planta Pueblo Esther · Santa Fe</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Agroindustria</span>
+      <h3>Nidera S.A.</h3>
+      <p>Planta Curuzú Cuantia · Corrientes</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Petroquímica</span>
+      <h3>Pecom Energía S.A.</h3>
+      <p>Pto. San Martín · Santa Fe</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Alimentación</span>
+      <h3>Molinos Río de la Plata</h3>
+      <p>Planta San Lorenzo · Santa Fe</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Consumo Masivo</span>
+      <h3>Unilever de Argentina</h3>
+      <p>Planta V. Gobernador Gálvez · Santa Fe</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Energía</span>
+      <h3>Petrobras Energía S.A.</h3>
+      <p>Planta Fluvial · San Lorenzo</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Entretenimiento</span>
+      <h3>Casino Rosario</h3>
+      <p>Rosario, Santa Fe</p>
+    </div>
+    <div class="client-card">
+      <span class="client-sector">Patrimonio</span>
+      <h3>Municipalidad San Lorenzo</h3>
+      <p>Museo Sanmartiniano · San Lorenzo</p>
+    </div>
+  </div>
+</section>
+
+<!-- Industries -->
+<section class="industries-section">
+  <div class="section-label">Sectores donde operamos</div>
+  <div class="section-title">Industrias</div>
+  <div class="industries-grid">
+    <div class="industry-item">
+      <span class="industry-icon">🌾</span>
+      <div><h4>Agroindustria</h4><p>Silos, celdas de almacenaje, plantas de fertilizantes</p></div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">⚡</span>
+      <div><h4>Energía y Petroquímica</h4><p>Cañerías de alta presión, plataformas, plantas</p></div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🍺</span>
+      <div><h4>Alimentación y Bebidas</h4><p>Galpones industriales, naves de producción</p></div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏭</span>
+      <div><h4>Manufactura</h4><p>Estructuras para plantas productivas de todo tipo</p></div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🏛</span>
+      <div><h4>Obras Públicas</h4><p>Museos, espacios públicos, infraestructura urbana</p></div>
+    </div>
+    <div class="industry-item">
+      <span class="industry-icon">🎰</span>
+      <div><h4>Entretenimiento</h4><p>Casinos, complejos comerciales y recreativos</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>¿Tu empresa podría ser la próxima?</h2>
+  <p>Contanos sobre tu proyecto y te preparamos un presupuesto sin cargo.</p>
+  <a href="contacto.html" class="btn-primary">Solicitar Presupuesto →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">CONSTRUCCIONES <span>METÁLICAS</span> S.R.L.</div>
+  <p>© 2025 · San Lorenzo, Santa Fe · Argentina</p>
+  <p style="font-size:0.68rem;color:#4A6580;">Todos los derechos reservados</p>
+</footer>
+
+<a class="whatsapp-float" href="#" title="WhatsApp">💬</a>
+</body>
+</html>

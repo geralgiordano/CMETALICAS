@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Servicios — Construcciones Metálicas S.R.L.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #2A7D8C; --teal-light: #3A9BAD; --teal-dark: #1D5F6B;
+    --gray-brand: #8A9099; --gray-light: #B0B8C1;
+    --steel: #1C2B3A; --steel-mid: #2E3D4D;
+    --warm-white: #F4F5F6; --dark: #0F1820;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--warm-white); color: var(--steel); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 70px;
+    background: rgba(15,24,32,0.97); backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--teal-dark);
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-icon { width: 36px; height: 36px; position: relative; }
+  .logo-icon::before { content: ''; position: absolute; width: 22px; height: 22px; background: var(--teal); border-radius: 4px; transform: rotate(45deg); top: 2px; left: 2px; }
+  .logo-icon::after { content: ''; position: absolute; width: 13px; height: 13px; background: var(--gray-brand); border-radius: 3px; transform: rotate(45deg); top: 11px; left: 11px; }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--warm-white); letter-spacing: 3px; line-height: 1; }
+  .logo span { color: var(--teal-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--gray-light); text-decoration: none; font-size: 0.76rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--teal-light); }
+  .nav-cta { background: var(--teal) !important; color: white !important; padding: 8px 22px; }
+
+  .page-hero {
+    padding: 140px 8% 80px;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px);
+  }
+  .page-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--teal-light); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .page-tag::before { content: ''; width: 24px; height: 2px; background: var(--teal-light); }
+  .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); color: var(--warm-white); letter-spacing: 2px; line-height: 1; }
+  .page-hero p { color: rgba(244,245,246,0.55); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-top: 16px; font-weight: 300; }
+
+  .section { padding: 80px 8%; }
+  .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--teal); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); color: var(--steel); line-height: 1; letter-spacing: 1px; margin-bottom: 50px; }
+
+  /* Services grid */
+  .services-main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,0.08);
+    margin-bottom: 80px;
+  }
+  .svc-card {
+    background: var(--warm-white);
+    padding: 38px 30px;
+    transition: background .3s, transform .3s;
+    position: relative;
+  }
+  .svc-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px; background: var(--teal); transition: width .4s; }
+  .svc-card:hover { background: white; transform: translateY(-3px); }
+  .svc-card:hover::after { width: 100%; }
+  .svc-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--teal); opacity: 0.2; line-height: 1; margin-bottom: 10px; }
+  .svc-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--steel); margin-bottom: 10px; }
+  .svc-card p { font-size: 0.88rem; line-height: 1.65; color: #5A6B7A; font-weight: 300; }
+
+  /* Equipment sections */
+  .equipment-section { background: white; padding: 80px 8%; }
+  .equipment-section + .equipment-section { background: var(--warm-white); }
+
+  .equip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+  .equip-list { display: flex; flex-direction: column; gap: 0; }
+  .equip-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 0.9rem;
+    color: var(--steel-mid);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .equip-item::before { content: '▸'; color: var(--teal); font-size: 0.7rem; margin-top: 3px; flex-shrink: 0; }
+  .equip-visual {
+    background: var(--steel);
+    height: 100%;
+    min-height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .equip-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(42,125,140,0.06) 0, rgba(42,125,140,0.06) 1px, transparent 0, transparent 50%),
+                repeating-linear-gradient(-45deg, rgba(42,125,140,0.06) 0, rgba(42,125,140,0.06) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+  .equip-visual span { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 4px; color: rgba(255,255,255,0.25); z-index: 1; }
+  .equip-icon { font-size: 4rem; opacity: 0.2; z-index: 1; }
+
+  footer {
+    background: var(--dark);
+    padding: 32px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid var(--teal-dark);
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--warm-white); letter-spacing: 3px; }
+  .footer-logo span { color: var(--teal-light); }
+  footer p { font-size: 0.74rem; color: var(--gray-brand); font-weight: 300; }
+
+  .whatsapp-float {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; box-shadow: 0 6px 24px rgba(37,211,102,0.35);
+    cursor: pointer; z-index: 200; transition: transform .2s; text-decoration: none;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <div class="logo-icon"></div>
+    <div class="logo">CONSTRUCCIONES <span>METÁLICAS</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="servicios.html" class="active">Servicios</a></li>
+    <li><a href="proyectos.html">Proyectos</a></li>
+    <li><a href="clientes.html">Clientes</a></li>
+    <li><a href="empresa.html">Empresa</a></li>
+    <li><a href="contacto.html" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-tag">Lo que hacemos</div>
+  <h1>Nuestros Servicios</h1>
+  <p>Acompañamos el crecimiento de cada cliente con soluciones integrales en estructuras metálicas, desde el proyecto hasta la entrega final.</p>
+</div>
+
+<!-- Servicios principales -->
+<section class="section">
+  <div class="section-label">Servicios de planta</div>
+  <div class="section-title">Qué Ofrecemos</div>
+  <div class="services-main">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <h3>Fabricación y Montaje</h3>
+      <p>Fabricación y montaje de estructuras metálicas de cualquier complejidad, en planta o en campo.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <h3>Proyectos Llave en Mano</h3>
+      <p>Gestión integral del proyecto: desde el diseño y la ingeniería hasta la entrega y puesta en marcha.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <h3>Celdas de Almacenaje</h3>
+      <p>Fabricación y montaje de celdas de almacenaje de cereales, silos, norias y cintas transportadoras.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">04</div>
+      <h3>Alquiler de Equipos</h3>
+      <p>Grúas, autoelevadores, semirremolques y carretones disponibles para alquiler con soporte técnico.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">05</div>
+      <h3>Cañerías y Tanques</h3>
+      <p>Montaje mecánico de cañerías de alta presión y tanques de almacenamiento de combustibles.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">06</div>
+      <h3>Herrería y Carpintería</h3>
+      <p>Herrería fina de obra, carpintería metálica y en aluminio, torres de iluminación, pintura y arenados.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">07</div>
+      <h3>Desarme de Estructuras</h3>
+      <p>Desmontaje y recupero profesional de estructuras metálicas con equipos especializados.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">08</div>
+      <h3>Mantenimiento de Plantas</h3>
+      <p>Servicios de mantenimiento preventivo y correctivo para plantas industriales y agroindustriales.</p>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">09</div>
+      <h3>Pintura y Arenados</h3>
+      <p>Trabajos de pintura convencional, "Airless" y arenado industrial para protección de estructuras.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Equipos de Planta -->
+<section class="equipment-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label">Infraestructura propia</div>
+    <div class="section-title">Equipos de Planta</div>
+    <div class="equip-grid">
+      <div class="equip-list">
+        <div class="equip-item">Puente grúa 20,00 mts. de luz × 5 ton. × 35,00 mts de longitud</div>
+        <div class="equip-item">2 puentes grúa de 3 ton, de 12,00 mts de luz × 35,00 mts de largo</div>
+        <div class="equip-item">Monorriel eléctrico con traslación de 1 ton. × 35,00 mts longitud</div>
+        <div class="equip-item">Guillotina M. D. Diamint para 13 mm espesor × 4000 mm</div>
+        <div class="equip-item">Plegadora M. D. Diamint para 3/8" × 4000 mm</div>
+        <div class="equip-item">Cizalla para hierro barra y ángulo</div>
+        <div class="equip-item">Soldadoras semiautomáticas y rectificadoras</div>
+        <div class="equip-item">Equipos de pintura convencional y "Airless"</div>
+        <div class="equip-item">Equipo de arenado</div>
+        <div class="equip-item">Generador Onam 240 kva</div>
+        <div class="equip-item">2 equipos cortadores por plasma H 10 y hasta 40 mm.</div>
+        <div class="equip-item">Roladora de chapa</div>
+        <div class="equip-item">Máquinas para carpintería en aluminio marca "Comidsa" (Líneas Módena y A30 News)</div>
+        <div class="equip-item">Generador Deutz 80 kva</div>
+        <div class="equip-item">Punzonadora hidráulica "Adabor" (300 ton)</div>
+        <div class="equip-item">2 balancines con matricería de agujereado circular y oblongo de 60 y 90 ton.</div>
+      </div>
+      <div class="equip-visual">
+        <div class="equip-icon">🏭</div>
+        <span>15.000 M² DE PLANTA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Equipos de Montaje -->
+<section class="equipment-section">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label">Flota propia</div>
+    <div class="section-title">Equipos de Montaje</div>
+    <div class="equip-grid">
+      <div class="equip-visual">
+        <div class="equip-icon">🏗</div>
+        <span>FLOTA COMPLETA PROPIA</span>
+      </div>
+      <div class="equip-list">
+        <div class="equip-item">Grúa Grove 45 ton. sobre camión</div>
+        <div class="equip-item">Grúa Grove 45 ton. todo terreno</div>
+        <div class="equip-item">Grúa Grove 30 ton. todo terreno</div>
+        <div class="equip-item">Grúa Drott 20 ton. todo terreno</div>
+        <div class="equip-item">Grúa P&H 20 ton. todo terreno</div>
+        <div class="equip-item">Camión Mercedes Benz 1114 con hidrogrúa 5 ton, semirremolque</div>
+        <div class="equip-item">Camión Mercedes Benz 2623 con carretón de 45 ton.</div>
+        <div class="equip-item">Camión Mercedes Benz 1634 con acoplado semirremolque</div>
+        <div class="equip-item">Camión Mercedes Benz 1215 con carretón 30 ton.</div>
+        <div class="equip-item">Camión Fíat 673 con semirremolque extensible</div>
+        <div class="equip-item">Camión Dodge 500 DP con hidroelevador de 12 m.</div>
+        <div class="equip-item">Tijera elevadora cap. 4 personas — altura de trabajo: 14 mts</div>
+        <div class="equip-item">Autoelevador articulado GROVE 51 XT — altura de trabajo: 16 mts.</div>
+        <div class="equip-item">Soldadoras trifásicas y monofásicas / Amoladoras</div>
+        <div class="equip-item">Andamios completos con tablones / Guinches y aparejos</div>
+        <div class="equip-item">Containers pañol-oficina (5) y casillas rodantes (2)</div>
+        <div class="equip-item">Equipo motosoldador / Compresores (10)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">CONSTRUCCIONES <span>METÁLICAS</span> S.R.L.</div>
+  <p>© 2025 · San Lorenzo, Santa Fe · Argentina</p>
+  <p style="font-size:0.68rem;color:#4A6580;">Todos los derechos reservados</p>
+</footer>
+
+<a class="whatsapp-float" href="#" title="WhatsApp">💬</a>
+</body>
+</html>

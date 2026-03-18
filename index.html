@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Construcciones Metálicas S.R.L.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal:        #2A7D8C;
+    --teal-light:  #3A9BAD;
+    --teal-dark:   #1D5F6B;
+    --gray-brand:  #8A9099;
+    --gray-light:  #B0B8C1;
+    --steel:       #1C2B3A;
+    --steel-mid:   #2E3D4D;
+    --warm-white:  #F4F5F6;
+    --white:       #FFFFFF;
+    --dark:        #0F1820;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--warm-white);
+    color: var(--steel);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 70px;
+    background: rgba(15, 24, 32, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--teal-dark);
+  }
+
+  .logo-wrap { display: flex; align-items: center; gap: 12px; }
+  .logo-icon {
+    width: 36px; height: 36px;
+    /* SVG-ish diamond via CSS */
+    position: relative;
+  }
+  .logo-icon::before {
+    content: '';
+    position: absolute;
+    width: 22px; height: 22px;
+    background: var(--teal);
+    border-radius: 4px;
+    transform: rotate(45deg);
+    top: 2px; left: 2px;
+  }
+  .logo-icon::after {
+    content: '';
+    position: absolute;
+    width: 13px; height: 13px;
+    background: var(--gray-brand);
+    border-radius: 3px;
+    transform: rotate(45deg);
+    top: 11px; left: 11px;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.35rem;
+    color: var(--warm-white);
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+  .logo span { color: var(--teal-light); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--gray-light);
+    text-decoration: none;
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--teal-light); }
+  .nav-cta {
+    background: var(--teal) !important;
+    color: white !important;
+    padding: 8px 22px;
+  }
+  .nav-cta:hover { background: var(--teal-light) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* diagonal grid texture */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.018) 60px, rgba(255,255,255,0.018) 61px),
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.018) 60px, rgba(255,255,255,0.018) 61px);
+    pointer-events: none;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 5% 100px 8%;
+    position: relative; z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--teal-light);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 30px; height: 2px;
+    background: var(--teal-light);
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    line-height: 0.95;
+    color: var(--warm-white);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--teal-light);
+    display: block;
+  }
+
+  .hero-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem;
+    color: var(--gray-brand);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    font-weight: 600;
+  }
+
+  .hero p {
+    color: rgba(244,245,246,0.58);
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 440px;
+    margin-bottom: 44px;
+    font-weight: 300;
+  }
+
+  .hero-buttons { display: flex; gap: 14px; }
+
+  .btn-primary {
+    background: var(--teal);
+    color: white;
+    padding: 14px 32px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: background .2s, transform .2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-2px); }
+
+  .btn-outline {
+    border: 1px solid rgba(244,245,246,0.22);
+    color: var(--warm-white);
+    padding: 14px 32px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: border-color .2s, color .2s, transform .2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--teal-light); color: var(--teal-light); transform: translateY(-2px); }
+
+  .hero-visual {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-photo-placeholder {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1D5F6B 0%, #2A7D8C 40%, #1C2B3A 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .hero-photo-placeholder::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--dark) 0%, transparent 25%),
+                linear-gradient(to top, var(--dark) 0%, transparent 35%);
+  }
+  .photo-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.25);
+    z-index: 1;
+  }
+
+  /* steel beams decorative */
+  .beams {
+    position: absolute; inset: 0;
+    overflow: hidden;
+    opacity: 0.12;
+  }
+  .beam {
+    position: absolute;
+    background: rgba(255,255,255,0.6);
+    transform-origin: center;
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: rgba(13, 22, 30, 0.95);
+    border-top: 2px solid var(--teal-dark);
+    z-index: 10;
+    grid-column: 1 / -1;
+  }
+  .stat {
+    padding: 26px;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    color: var(--teal-light);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-brand);
+    margin-top: 5px;
+    display: block;
+  }
+
+  /* ── SERVICES ── */
+  .section { padding: 100px 8%; }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before {
+    content: '';
+    width: 24px; height: 2px;
+    background: var(--teal);
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    color: var(--steel);
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 60px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .service-card {
+    background: var(--warm-white);
+    padding: 44px 34px;
+    transition: background .3s, transform .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 3px;
+    background: var(--teal);
+    transition: width .4s;
+  }
+  .service-card:hover { background: white; transform: translateY(-4px); }
+  .service-card:hover::before { width: 100%; }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    background: rgba(42,125,140,0.1);
+    border: 1px solid rgba(42,125,140,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 22px;
+  }
+  .service-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 12px;
+  }
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #5A6B7A;
+    font-weight: 300;
+  }
+
+  /* ── PROJECTS ── */
+  .projects-section {
+    padding: 100px 8%;
+    background: var(--steel);
+  }
+  .projects-section .section-title { color: var(--warm-white); }
+  .projects-section .section-label { color: var(--teal-light); }
+  .projects-section .section-label::before { background: var(--teal-light); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: 270px 270px;
+    gap: 5px;
+  }
+
+  .project-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .project-card:first-child { grid-row: 1 / 3; }
+
+  .project-placeholder {
+    width: 100%; height: 100%;
+    transition: all .4s;
+    position: relative;
+    display: flex; align-items: flex-end;
+  }
+  .proj-1 { background: linear-gradient(135deg, var(--teal-dark) 0%, var(--teal) 100%); }
+  .proj-2 { background: linear-gradient(135deg, #3D5166 0%, #2E4057 100%); }
+  .proj-3 { background: linear-gradient(135deg, var(--teal-dark) 0%, #1C2B3A 100%); }
+  .proj-4 { background: linear-gradient(135deg, #4A6580 0%, var(--teal-dark) 100%); }
+
+  .project-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 0, transparent 50%);
+    background-size: 18px 18px;
+  }
+
+  .project-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 26px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+    transform: translateY(6px);
+    transition: transform .4s;
+  }
+  .project-card:hover .project-info { transform: translateY(0); }
+
+  .project-tag {
+    font-size: 0.63rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .project-info h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: white;
+  }
+
+  /* ── WHY US ── */
+  .why-section {
+    padding: 100px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    background: white;
+  }
+
+  .why-visual {
+    position: relative;
+    height: 500px;
+  }
+  .why-main-block {
+    position: absolute;
+    top: 0; left: 0;
+    width: 75%; height: 80%;
+    background: var(--steel);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .why-main-block::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(45deg, rgba(42,125,140,0.06) 0, rgba(42,125,140,0.06) 1px, transparent 0, transparent 50%),
+      repeating-linear-gradient(-45deg, rgba(42,125,140,0.06) 0, rgba(42,125,140,0.06) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+  .why-inner-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: rgba(255,255,255,0.05);
+    letter-spacing: 4px;
+    z-index: 1;
+  }
+  .why-accent-block {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 50%; height: 46%;
+    background: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .why-years { text-align: center; }
+  .why-years .big-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5.5rem;
+    color: white;
+    line-height: 1;
+    display: block;
+  }
+  .why-years span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    display: block;
+  }
+
+  .why-lead {
+    font-size: 1rem;
+    color: #5A6B7A;
+    line-height: 1.75;
+    margin-bottom: 38px;
+    font-weight: 300;
+  }
+
+  .why-points { display: flex; flex-direction: column; gap: 22px; }
+  .why-point {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .why-point:last-child { border-bottom: none; }
+  .point-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--teal);
+    line-height: 1;
+    min-width: 36px;
+    opacity: 0.5;
+  }
+  .point-text h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 5px;
+  }
+  .point-text p {
+    font-size: 0.87rem;
+    color: #5A6B7A;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── CLIENTS STRIP ── */
+  .clients-strip {
+    background: var(--warm-white);
+    padding: 60px 8%;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .clients-strip .section-label { margin-bottom: 36px; }
+  .clients-row {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .client-badge {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 16px 28px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #5A6B7A;
+    transition: border-color .2s, color .2s;
+  }
+  .client-badge:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--steel-mid);
+    padding: 100px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-section .section-title { color: var(--warm-white); }
+  .contact-section .section-label { color: var(--teal-light); }
+  .contact-section .section-label::before { background: var(--teal-light); }
+
+  .contact-info { display: flex; flex-direction: column; gap: 26px; }
+  .contact-item { display: flex; gap: 18px; align-items: flex-start; }
+  .contact-icon {
+    width: 42px; height: 42px;
+    background: rgba(42,125,140,0.15);
+    border: 1px solid rgba(42,125,140,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .contact-detail h4 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    margin-bottom: 6px;
+  }
+  .contact-detail p {
+    font-size: 0.93rem;
+    color: rgba(244,245,246,0.65);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .contact-form { display: flex; flex-direction: column; gap: 15px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-brand);
+  }
+  .form-group input,
+  .form-group textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--warm-white);
+    padding: 12px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    outline: none;
+    transition: border-color .2s;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--teal); }
+  .form-group textarea { height: 110px; resize: none; }
+  ::placeholder { color: rgba(244,245,246,0.22); }
+
+  .submit-btn {
+    background: var(--teal);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background .2s;
+    align-self: flex-start;
+  }
+  .submit-btn:hover { background: var(--teal-light); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 32px 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid var(--teal-dark);
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: var(--warm-white);
+    letter-spacing: 3px;
+  }
+  .footer-logo span { color: var(--teal-light); }
+  footer p { font-size: 0.74rem; color: var(--gray-brand); font-weight: 300; }
+
+  /* ── WHATSAPP ── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    width: 56px; height: 56px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.35);
+    cursor: pointer;
+    z-index: 200;
+    transition: transform .2s;
+    text-decoration: none;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+
+  /* ── BANNER ── */
+  .mockup-banner {
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: var(--teal-dark);
+    color: rgba(255,255,255,0.85);
+    text-align: center;
+    padding: 7px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    z-index: 99;
+  }
+</style>
+</head>
+<body>
+
+<div class="mockup-banner">✦ MOCKUP DE REFERENCIA — Construcciones Metálicas S.R.L. ✦</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo-wrap">
+    <div class="logo-icon"></div>
+    <div class="logo">CONSTRUCCIONES <span>METÁLICAS</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Servicios</a></li>
+    <li><a href="#">Proyectos</a></li>
+    <li><a href="#">Empresa</a></li>
+    <li><a href="#">Clientes</a></li>
+    <li><a href="#" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding-top:70px;">
+  <div class="hero-text">
+    <span class="hero-tag">San Lorenzo · Santa Fe · Argentina</span>
+    <h1>Estructuras<em>Metálicas</em></h1>
+    <p class="hero-sub">de precisión y escala</p>
+    <p>Más de 20 años construyendo estructuras metálicas de alta complejidad para industrias, logística y espacios comerciales en toda la Argentina.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn-primary">Ver Proyectos</a>
+      <a href="#" class="btn-outline">Pedir Presupuesto</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-photo-placeholder">
+      <p class="photo-label">📷 TUS FOTOS DE OBRAS AQUÍ</p>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">20+</span>
+      <span class="stat-label">Años de experiencia</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">200+</span>
+      <span class="stat-label">Proyectos completados</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Llave en mano</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+  <div class="section-label">Lo que hacemos</div>
+  <div class="section-title">Nuestros Servicios</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏭</div>
+      <h3>Estructuras Industriales</h3>
+      <p>Diseño, fabricación y montaje de estructuras metálicas para naves industriales, galpones y complejos de gran escala.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏪</div>
+      <h3>Logística y Almacenaje</h3>
+      <p>Construcción de centros logísticos, celdas de almacenamiento y silos adaptados a cada cliente.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔩</div>
+      <h3>Fabricación a Medida</h3>
+      <p>Producción en planta de perfiles y piezas metálicas bajo especificaciones técnicas precisas.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏗</div>
+      <h3>Montaje e Instalación</h3>
+      <p>Equipo técnico especializado en montaje y remodelación de estructuras en todo el país.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚜</div>
+      <h3>Alquiler de Equipos</h3>
+      <p>Equipos especializados para obras de construcción metálica con soporte técnico incluido.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📐</div>
+      <h3>Proyecto Integral</h3>
+      <p>Asesoramiento desde el diseño hasta la entrega: presupuesto, ingeniería y gestión de obra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects-section">
+  <div class="section-label">Nuestro trabajo</div>
+  <div class="section-title" style="margin-bottom:40px;">Proyectos Destacados</div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-placeholder proj-1"></div>
+      <div class="project-info">
+        <span class="project-tag">Entretenimiento · Rosario</span>
+        <h3>Casino Rosario</h3>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-placeholder proj-2"></div>
+      <div class="project-info">
+        <span class="project-tag">Patrimonio · San Lorenzo</span>
+        <h3>Museo San Lorenzo</h3>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-placeholder proj-3"></div>
+      <div class="project-info">
+        <span class="project-tag">Industrial · Santa Fe</span>
+        <h3>CINA S.R.L. Pueblo Esther</h3>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-placeholder proj-4"></div>
+      <div class="project-info">
+        <span class="project-tag">Agroindustria · Argentina</span>
+        <h3>Agroservicios Pampeanos</h3>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:50px;">
+    <a href="#" class="btn-outline">Ver todos los proyectos →</a>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="why-visual">
+    <div class="why-main-block">
+      <span class="why-inner-text">METAL</span>
+    </div>
+    <div class="why-accent-block">
+      <div class="why-years">
+        <span class="big-num">20</span>
+        <span>Años en el<br>mercado</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="why-content">
+    <div class="section-label">Por qué elegirnos</div>
+    <div class="section-title">La solidez de<br>nuestro nombre</div>
+    <p class="why-lead">Líderes en construcción metálica en Santa Fe y el interior del país, con presencia en proyectos de alta complejidad e impacto nacional.</p>
+    <div class="why-points">
+      <div class="why-point">
+        <span class="point-num">01</span>
+        <div class="point-text">
+          <h4>Fabricación propia</h4>
+          <p>Planta de producción propia que nos permite controlar calidad y tiempos de entrega en cada proyecto.</p>
+        </div>
+      </div>
+      <div class="why-point">
+        <span class="point-num">02</span>
+        <div class="point-text">
+          <h4>Servicio "Llave en Mano"</h4>
+          <p>Nos hacemos cargo de todo el proceso: proyecto, fabricación, montaje y entrega final.</p>
+        </div>
+      </div>
+      <div class="why-point">
+        <span class="point-num">03</span>
+        <div class="point-text">
+          <h4>Experiencia en grandes obras</h4>
+          <p>Casinos, museos, industrias y empresas del grupo Agrium Inc. confían en nuestra trayectoria.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients-strip">
+  <div class="section-label">Clientes que confiaron en nosotros</div>
+  <div class="clients-row">
+    <div class="client-badge">Casino Rosario</div>
+    <div class="client-badge">Municipalidad San Lorenzo</div>
+    <div class="client-badge">CINA S.R.L.</div>
+    <div class="client-badge">Agrium Inc.</div>
+    <div class="client-badge">Agroservicios Pampeanos</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section">
+  <div>
+    <div class="section-label">Hablemos</div>
+    <div class="section-title">Contacto</div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail">
+          <h4>Dirección</h4>
+          <p>Ruta 11 y Brasil<br>San Lorenzo, Santa Fe · Argentina</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail">
+          <h4>Teléfono</h4>
+          <p>(03476) 426716</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-detail">
+          <h4>Email</h4>
+          <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="583b37362c393b2c37183b353d2c3934313b392b763b373576392a">[email&#160;protected]</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" placeholder="Tu nombre">
+      </div>
+      <div class="form-group">
+        <label>Empresa</label>
+        <input type="text" placeholder="Tu empresa">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" placeholder="tu@email.com">
+    </div>
+    <div class="form-group">
+      <label>Teléfono</label>
+      <input type="tel" placeholder="+54 ...">
+    </div>
+    <div class="form-group">
+      <label>Mensaje</label>
+      <textarea placeholder="Contanos sobre tu proyecto..."></textarea>
+    </div>
+    <button class="submit-btn">Enviar Consulta →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">CONSTRUCCIONES <span>METÁLICAS</span> S.R.L.</div>
+  <p>© 2025 · San Lorenzo, Santa Fe · Argentina</p>
+  <p style="font-size:0.68rem;color:#4A6

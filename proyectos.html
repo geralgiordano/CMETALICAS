@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos — Construcciones Metálicas S.R.L.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #2A7D8C; --teal-light: #3A9BAD; --teal-dark: #1D5F6B;
+    --gray-brand: #8A9099; --gray-light: #B0B8C1;
+    --steel: #1C2B3A; --steel-mid: #2E3D4D;
+    --warm-white: #F4F5F6; --dark: #0F1820;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--warm-white); color: var(--steel); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 70px;
+    background: rgba(15,24,32,0.97); backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--teal-dark);
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-icon { width: 36px; height: 36px; position: relative; }
+  .logo-icon::before { content: ''; position: absolute; width: 22px; height: 22px; background: var(--teal); border-radius: 4px; transform: rotate(45deg); top: 2px; left: 2px; }
+  .logo-icon::after { content: ''; position: absolute; width: 13px; height: 13px; background: var(--gray-brand); border-radius: 3px; transform: rotate(45deg); top: 11px; left: 11px; }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--warm-white); letter-spacing: 3px; line-height: 1; }
+  .logo span { color: var(--teal-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--gray-light); text-decoration: none; font-size: 0.76rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--teal-light); }
+  .nav-cta { background: var(--teal) !important; color: white !important; padding: 8px 22px; }
+
+  .page-hero {
+    padding: 140px 8% 80px;
+    background: var(--dark);
+    position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px);
+  }
+  .page-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--teal-light); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; position: relative; }
+  .page-tag::before { content: ''; width: 24px; height: 2px; background: var(--teal-light); }
+  .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); color: var(--warm-white); letter-spacing: 2px; line-height: 1; position: relative; }
+  .page-hero p { color: rgba(244,245,246,0.55); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-top: 16px; font-weight: 300; position: relative; }
+
+  .section { padding: 80px 8%; }
+  .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--teal); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); color: var(--steel); line-height: 1; letter-spacing: 1px; margin-bottom: 50px; }
+
+  /* Project cards */
+  .projects-list { display: flex; flex-direction: column; gap: 1px; background: rgba(0,0,0,0.06); }
+  .project-item {
+    background: white;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    transition: background .2s;
+  }
+  .project-item:hover { background: var(--warm-white); }
+  .project-item:nth-child(even) { background: var(--warm-white); }
+  .project-item:nth-child(even):hover { background: white; }
+
+  .project-visual {
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pv-1 { background: linear-gradient(135deg, var(--teal-dark), var(--teal)); }
+  .pv-2 { background: linear-gradient(135deg, #2E4057, #3D5166); }
+  .pv-3 { background: linear-gradient(135deg, #1C2B3A, #2E3D4D); }
+  .pv-4 { background: linear-gradient(135deg, var(--teal-dark), #1C2B3A); }
+  .pv-5 { background: linear-gradient(135deg, #3D5166, var(--teal-dark)); }
+  .pv-6 { background: linear-gradient(135deg, #2E3D4D, #4A6580); }
+  .pv-7 { background: linear-gradient(135deg, var(--teal), #2E4057); }
+  .pv-8 { background: linear-gradient(135deg, #1D5F6B, #2E3D4D); }
+  .pv-9 { background: linear-gradient(135deg, #2E4057, var(--teal)); }
+  .pv-10 { background: linear-gradient(135deg, var(--steel-mid), var(--teal-dark)); }
+
+  .project-visual::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 0, transparent 50%),
+                      repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 0, transparent 50%);
+    background-size: 18px 18px;
+  }
+  .pv-photo-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.75rem; letter-spacing: 3px; color: rgba(255,255,255,0.3); z-index: 1; text-align: center; padding: 0 10px; }
+
+  .project-content { padding: 40px 44px; display: flex; flex-direction: column; justify-content: center; }
+  .project-tag-line { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; }
+  .project-content h2 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--steel); margin-bottom: 14px; }
+  .project-content p { font-size: 0.9rem; line-height: 1.7; color: #5A6B7A; font-weight: 300; }
+
+  footer {
+    background: var(--dark);
+    padding: 32px 8%;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 2px solid var(--teal-dark);
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--warm-white); letter-spacing: 3px; }
+  .footer-logo span { color: var(--teal-light); }
+  footer p { font-size: 0.74rem; color: var(--gray-brand); font-weight: 300; }
+
+  .whatsapp-float {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; box-shadow: 0 6px 24px rgba(37,211,102,0.35);
+    cursor: pointer; z-index: 200; transition: transform .2s; text-decoration: none;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <div class="logo-icon"></div>
+    <div class="logo">CONSTRUCCIONES <span>METÁLICAS</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="proyectos.html" class="active">Proyectos</a></li>
+    <li><a href="clientes.html">Clientes</a></li>
+    <li><a href="empresa.html">Empresa</a></li>
+    <li><a href="contacto.html" class="nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-tag">Nuestro trabajo</div>
+  <h1>Proyectos Destacados</h1>
+  <p>Obras de alta complejidad realizadas para empresas líderes en industria, agroindustria, alimentación y energía a lo largo de toda la Argentina.</p>
+</div>
+
+<section class="section" style="padding-bottom:0;">
+  <div class="section-label">Obras más importantes</div>
+  <div class="section-title">Lo que construimos</div>
+</section>
+
+<div style="padding: 0 8% 80px;">
+  <div class="projects-list">
+
+    <div class="project-item">
+      <div class="project-visual pv-1"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Industria · Zárate, Buenos Aires</div>
+        <h2>Cervecería y Maltería Quilmes</h2>
+        <p>Montaje de estructura metálica en perfiles conformados: lateral y techo de un galpón de 80,00 × 50,00 mts en chapa trapezoidal, con fijación en tornillos autoperforantes y autorroscantes, instalación de aireadores, policarbonato y protección de descargas eléctricas. Incluye un galpón adicional de 30,00 × 50,00 mts con montaje de cabreadas y correas.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-2"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Agroindustria · Argentina</div>
+        <h2>Agroservicios Pampeanos — Agrium Inc.</h2>
+        <p>Proyecto, ejecución y entrega "Llave en Mano" de las instalaciones en Argentina para la empresa ASP del grupo Agrium Inc., compañía con sede en Alberta, Canadá y uno de los mayores productores de fertilizantes del mundo, principal distribuidor para el agro en los Estados Unidos.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-3"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Educación · Pilar, Buenos Aires</div>
+        <h2>Universidad Austral</h2>
+        <p>Montaje de estructura de techo y fijación de chapa de techo prepintada. Provisión y colocación de zinguería de terminación y canaletas de desagüe. Superficie aproximada: 2.500 m² con varios paños de techo de distintas pendientes y orientaciones.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-4"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Alimentación · Tucumán</div>
+        <h2>ARCOR S.A.I.C.</h2>
+        <p>Montaje de un galpón parabólico de 36 m. de luz por 100 m. de largo para las instalaciones industriales de ARCOR en la provincia de Tucumán.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-5"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Industrial · Pueblo Esther, Santa Fe</div>
+        <h2>CINA S.R.L. — Planta Pueblo Esther</h2>
+        <p>Fabricación y montaje de estructura metálica en reticulado de perfiles laminados para nave industrial de 40,00 × 40,00 m. más una galería de 40,00 × 10,00 m., cerramientos y piezas de zinguería.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-6"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Agroindustria · Curuzú Cuantia, Corrientes</div>
+        <h2>Nidera S.A. — Planta Curuzú Cuantia</h2>
+        <p>Proyecto, fabricación y montaje de depósito para fertilizantes en estructura metálica con perfiles IPE y correas de madera multilaminada. Cubierta y laterales en chapa color, zinguería, portones, galpón parabólico de 18 × 26 m. y provisión de tanque de agua de 5.000 lts en acero inoxidable.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-7"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Petroquímica · Pto. San Martín, Santa Fe</div>
+        <h2>Pecom Energía S.A.</h2>
+        <p>Reemplazo total de cañería de enfriamiento en Planta Reformadora: prefabricado y montaje de cañerías de varios diámetros con soldaduras radiografiadas, incluyendo la colocación de variados accesorios y acometidas a 21 equipos de varios diámetros. Obra realizada durante parada de planta en septiembre 2000.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-8"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Alimentación · San Lorenzo, Santa Fe</div>
+        <h2>Molinos Río de la Plata S.A.</h2>
+        <p>Cambio de traza de cañerías de red de incendio, agua industrial y aceite: desmontaje y recupero de cañerías y accesorios, prefabricado y montaje de nuevos tramos de cañerías y soportes. Total de metros lineales de la obra: 400,00 mts.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-9"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Consumo masivo · Villa Gobernador Gálvez, Santa Fe</div>
+        <h2>Unilever de Argentina S.A.</h2>
+        <p>Ampliación nave depósito: fabricación y montaje de estructura metálica ejecutada en reticulado de perfiles laminados vinculado a nave existente, con cerramientos laterales, cubierta de techo en chapa tipo PG400, desagües y singuería de terminación. Superficie cubierta: 22,00 × 60,00 mts.</p>
+      </div>
+    </div>
+
+    <div class="project-item">
+      <div class="project-visual pv-10"><div class="pv-photo-label">📷 FOTO DEL PROYECTO</div></div>
+      <div class="project-content">
+        <div class="project-tag-line">Energía · San Lorenzo, Santa Fe</div>
+        <h2>Petrobras Energía S.A. — Planta Fluvial</h2>
+        <p>Adecuación de Cargadero de Vagones: fabricaciones y reparaciones para adecuar instalaciones de cargadero de vagones para carga de combustibles, estructuras metálicas para pasarelas y plataformas de inspección con escaleras de acceso, cabinas de operadores, columnas metálicas de alumbrado e ingeniería de obra.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">CONSTRUCCIONES <span>METÁLICAS</span> S.R.L.</div>
+  <p>© 2025 · San Lorenzo, Santa Fe · Argentina</p>
+  <p style="font-size:0.68rem;color:#4A6580;">Todos los derechos reservados</p>
+</footer>
+
+<a class="whatsapp-float" href="#" title="WhatsApp">💬</a>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contacto — Construcciones Metálicas S.R.L.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --teal: #2A7D8C; --teal-light: #3A9BAD; --teal-dark: #1D5F6B;
+    --gray-brand: #8A9099; --gray-light: #B0B8C1;
+    --steel: #1C2B3A; --steel-mid: #2E3D4D;
+    --warm-white: #F4F5F6; --dark: #0F1820;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Barlow', sans-serif; background: var(--warm-white); color: var(--steel); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 70px;
+    background: rgba(15,24,32,0.97); backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--teal-dark);
+  }
+  .logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .logo-icon { width: 36px; height: 36px; position: relative; }
+  .logo-icon::before { content: ''; position: absolute; width: 22px; height: 22px; background: var(--teal); border-radius: 4px; transform: rotate(45deg); top: 2px; left: 2px; }
+  .logo-icon::after { content: ''; position: absolute; width: 13px; height: 13px; background: var(--gray-brand); border-radius: 3px; transform: rotate(45deg); top: 11px; left: 11px; }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--warm-white); letter-spacing: 3px; line-height: 1; }
+  .logo span { color: var(--teal-light); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--gray-light); text-decoration: none; font-size: 0.76rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color .2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--teal-light); }
+  .nav-cta { background: var(--teal) !important; color: white !important; padding: 8px 22px; }
+
+  .page-hero {
+    padding: 140px 8% 80px; background: var(--dark); position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px),
+                repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.015) 60px, rgba(255,255,255,0.015) 61px);
+  }
+  .page-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--teal-light); display: flex; align-items: center; gap: 10px; margin-bottom: 16px; position: relative; }
+  .page-tag::before { content: ''; width: 24px; height: 2px; background: var(--teal-light); }
+  .page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 5vw, 5rem); color: var(--warm-white); letter-spacing: 2px; line-height: 1; position: relative; }
+  .page-hero p { color: rgba(244,245,246,0.55); font-size: 1rem; line-height: 1.7; max-width: 600px; margin-top: 16px; font-weight: 300; position: relative; }
+
+  .contact-main {
+    padding: 80px 8%;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 80px;
+    background: white;
+  }
+
+  .section-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .section-label::before { content: ''; width: 24px; height: 2px; background: var(--teal); }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 3.5vw, 3rem); color: var(--steel); line-height: 1; letter-spacing: 1px; margin-bottom: 40px; }
+
+  .contact-info { display: flex; flex-direction: column; gap: 28px; margin-bottom: 40px; }
+  .contact-item { display: flex; gap: 18px; align-items: flex-start; }
+  .contact-icon {
+    width: 44px; height: 44px;
+    background: rgba(42,125,140,0.08);
+    border: 1px solid rgba(42,125,140,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .contact-detail h4 { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
+  .contact-detail p { font-size: 0.93rem; color: var(--steel-mid); line-height: 1.5; font-weight: 400; }
+  .contact-detail a { color: var(--teal); text-decoration: none; }
+  .contact-detail a:hover { text-decoration: underline; }
+
+  .contacts-people { display: flex; flex-direction: column; gap: 16px; }
+  .person-card {
+    background: var(--warm-white);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-left: 3px solid var(--teal);
+  }
+  .person-avatar {
+    width: 42px; height: 42px;
+    background: var(--teal);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    color: white;
+    flex-shrink: 0;
+  }
+  .person-info h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--steel); }
+  .person-info a { font-size: 0.83rem; color: var(--teal); text-decoration: none; font-weight: 400; }
+  .person-info a:hover { text-decoration: underline; }
+
+  /* Form */
+  .contact-form-wrap .section-label { color: var(--teal); }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gray-brand); }
+  .form-group input, .form-group select, .form-group textarea {
+    background: var(--warm-white);
+    border: 1px solid rgba(0,0,0,0.1);
+    color: var(--steel);
+    padding: 12px 16px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem; font-weight: 400;
+    outline: none; transition: border-color .2s; width: 100%;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); background: white; }
+  .form-group textarea { height: 120px; resize: none; }
+
+  .submit-btn {
+    background: var(--teal); color: white; border: none;
+    padding: 14px 36px;
+    font-family: 'Barlow', sans-serif; font-size: 0.82rem;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    cursor: pointer; transition: background .2s; align-self: flex-start;
+  }
+  .submit-btn:hover { background: var(--teal-light); }
+
+  .form-note { font-size: 0.78rem; color: var(--gray-brand); font-weight: 300; margin-top: 4px; }
+
+  /* Map placeholder */
+  .map-section {
+    height: 300px;
+    background: var(--steel-mid);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 12px;
+    position: relative; overflow: hidden;
+  }
+  .map-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, rgba(42,125,140,0.06) 0, rgba(42,125,140,0.06) 1px, transparent 0, transparent 50%),
+                repeating-linear-gradient(-45deg, rgba(42,125,140,0.06) 0, rgba(42,125,140,0.06) 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+  .map-section p { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 4px; color: rgba(255,255,255,0.3); z-index: 1; }
+  .map-pin { font-size: 3rem; z-index: 1; }
+  .map-address { font-size: 0.85rem; color: rgba(255,255,255,0.5); z-index: 1; font-weight: 300; }
+
+  footer {
+    background: var(--dark);
+    padding: 32px 8%;
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 2px solid var(--teal-dark);
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--warm-white); letter-spacing: 3px; }
+  .footer-logo span { color: var(--teal-light); }
+  footer p { font-size: 0.74rem; color: var(--gray-brand); font-weight: 300; }
+
+  .whatsapp-float {
+    position: fixed; bottom: 30px; right: 30px;
+    width: 56px; height: 56px; background: #25D366; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; box-shadow: 0 6px 24px rgba(37,211,102,0.35);
+    cursor: pointer; z-index: 200; transition: transform .2s; text-decoration: none;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo-wrap">
+    <div class="logo-icon"></div>
+    <div class="logo">CONSTRUCCIONES <span>METÁLICAS</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="servicios.html">Servicios</a></li>
+    <li><a href="proyectos.html">Proyectos</a></li>
+    <li><a href="clientes.html">Clientes</a></li>
+    <li><a href="empresa.html">Empresa</a></li>
+    <li><a href="contacto.html" class="active nav-cta">Contacto</a></li>
+  </ul>
+</nav>
+
+<div class="page-hero">
+  <div class="page-tag">Hablemos</div>
+  <h1>Contacto</h1>
+  <p>Contanos sobre tu proyecto y te preparamos un presupuesto sin cargo. Recibirás nuestra respuesta a la brevedad.</p>
+</div>
+
+<section class="contact-main">
+
+  <!-- Info -->
+  <div>
+    <div class="section-label">Dónde encontrarnos</div>
+    <div class="section-title">Datos de Contacto</div>
+
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail">
+          <h4>Administración y Fábrica</h4>
+          <p>Ruta 11 y Brasil, CP 2000<br>San Lorenzo / Santa Fe / Argentina</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail">
+          <h4>Teléfono / Fax</h4>
+          <p><a href="tel:+5403476426716">(03476) 426716</a></p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-detail">
+          <h4>Email general</h4>
+          <p><a href="mailto:contacto@cmetalicas.com.ar">contacto@cmetalicas.com.ar</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top: 40px;">Contactos directos</div>
+    <div class="contacts-people">
+      <div class="person-card">
+        <div class="person-avatar">HG</div>
+        <div class="person-info">
+          <h4>Héctor Giordano</h4>
+          <a href="mailto:hgiordano@cmetalicas.com.ar">hgiordano@cmetalicas.com.ar</a>
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="person-avatar">MD</div>
+        <div class="person-info">
+          <h4>Mariel Dallera</h4>
+          <a href="mailto:mdallera@cmetalicas.com.ar">mdallera@cmetalicas.com.ar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="contact-form-wrap">
+    <div class="section-label">Formulario de consulta</div>
+    <div class="section-title">Escribinos</div>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre y apellido</label>
+          <input type="text" placeholder="Tu nombre completo">
+        </div>
+        <div class="form-group">
+          <label>Empresa / Razón Social</label>
+          <input type="text" placeholder="Tu empresa">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Localidad</label>
+          <input type="text" placeholder="Tu ciudad">
+        </div>
+        <div class="form-group">
+          <label>Provincia / País</label>
+          <input type="text" placeholder="Santa Fe, Argentina">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="+54 ...">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="tu@email.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>¿Sobre qué servicio consultás?</label>
+        <select>
+          <option value="">Seleccioná una opción</option>
+          <option>Fabricación y montaje de estructuras</option>
+          <option>Proyecto llave en mano</option>
+          <option>Celdas de almacenaje</option>
+          <option>Alquiler de equipos</option>
+          <option>Cañerías y tanques</option>
+          <option>Otro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Comentarios / Consulta</label>
+        <textarea placeholder="Describí tu proyecto o consulta..."></textarea>
+      </div>
+      <button class="submit-btn">Enviar Consulta →</button>
+      <p class="form-note">Gracias por contactarse con nosotros. Recibirá nuestra respuesta a la brevedad. — Att. Construcciones Metálicas S.R.L.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- Map placeholder -->
+<div class="map-section">
+  <div class="map-pin">📍</div>
+  <p>RUTA 11 Y BRASIL — SAN LORENZO, SANTA FE</p>
+  <p class="map-address">Aquí podés insertar un mapa de Google Maps en Netlify</p>
+</div>
+
+<footer>
+  <div class="footer-logo">CONSTRUCCIONES <span>METÁLICAS</span> S.R.L.</div>
+  <p>© 2025 · San Lorenzo, Santa Fe · Argentina</p>
+  <p style="font-size:0.68rem;color:#4A6580;">Todos los derechos reservados</p>
+</footer>
+
+<a class="whatsapp-float" href="#" title="WhatsApp">💬</a>
+</body>
+</html>
